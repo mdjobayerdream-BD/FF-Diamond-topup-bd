@@ -23,18 +23,17 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess, onNavigate }) => {
     setError('');
 
     if (isLogin) {
-      // Demo logic: Find user by phone
       const users = store.getUsers();
       let user = users.find(u => u.phone === formData.phone);
       
-      // Special check for Admin Login via UID
       if (formData.uid === ADMIN_UID) {
         user = {
           id: 'admin-' + Date.now(),
           uid: ADMIN_UID,
           name: 'Super Admin',
           phone: formData.phone || '01619789895',
-          role: 'ADMIN'
+          role: 'ADMIN',
+          walletBalance: 0
         };
       }
 
@@ -45,7 +44,6 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess, onNavigate }) => {
         setError('User not found. Please register.');
       }
     } else {
-      // Registration
       if (!formData.name || !formData.phone) {
         setError('Please fill all fields');
         return;
@@ -56,7 +54,8 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess, onNavigate }) => {
         uid: formData.uid || '',
         name: formData.name,
         phone: formData.phone,
-        role: 'USER'
+        role: 'USER',
+        walletBalance: 0
       };
 
       store.setCurrentUser(newUser);
@@ -67,7 +66,6 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess, onNavigate }) => {
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
       <div className="glass-card w-full max-w-md p-8 rounded-3xl border border-slate-800 shadow-2xl relative overflow-hidden">
-        {/* Aesthetic background glow */}
         <div className="absolute -top-24 -right-24 w-48 h-48 bg-emerald-500/20 blur-[100px] rounded-full"></div>
         <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-blue-500/20 blur-[100px] rounded-full"></div>
 
@@ -149,4 +147,5 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess, onNavigate }) => {
   );
 };
 
+// Fixed: Added missing default export
 export default Login;

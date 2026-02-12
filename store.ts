@@ -39,6 +39,18 @@ class Store {
     localStorage.setItem('packages', JSON.stringify(packages));
   }
 
+  addPackage(pkg: Package) {
+    const packages = this.getPackages();
+    packages.push(pkg);
+    this.updatePackages(packages);
+  }
+
+  deletePackage(id: string) {
+    const packages = this.getPackages();
+    const updated = packages.filter(p => p.id !== id);
+    this.updatePackages(updated);
+  }
+
   getSettings(): SiteSettings {
     return JSON.parse(localStorage.getItem('settings') || '{}');
   }

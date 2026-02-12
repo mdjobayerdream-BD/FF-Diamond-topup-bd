@@ -6,6 +6,8 @@ import Login from './pages/Login';
 import OrderPage from './pages/OrderPage';
 import Dashboard from './pages/Dashboard';
 import AdminPanel from './pages/AdminPanel';
+import HowToBuy from './pages/HowToBuy';
+import Contact from './pages/Contact';
 import { Package, User, Order } from './types';
 import { store } from './store';
 
@@ -55,10 +57,12 @@ const App: React.FC = () => {
         return currentUser ? <Dashboard user={currentUser} /> : <Login onLoginSuccess={handleLoginSuccess} onNavigate={handleNavigate} />;
       case 'admin':
         return currentUser?.role === 'ADMIN' ? <AdminPanel /> : <Home onSelectPackage={handleSelectPackage} onNavigate={handleNavigate} />;
-      case 'faq':
-        return <div className="max-w-4xl mx-auto px-4 py-20 text-center text-slate-400">FAQ Content coming soon...</div>;
+      case 'how-to':
+        return <HowToBuy />;
       case 'contact':
-        return <div className="max-w-4xl mx-auto px-4 py-20 text-center text-slate-400">Contact Us Content coming soon...</div>;
+        return <Contact />;
+      case 'faq':
+        return <div className="max-w-4xl mx-auto px-4 py-40 text-center text-slate-400 font-orbitron text-2xl">FAQ SECTION COMING SOON</div>;
       default:
         return <Home onSelectPackage={handleSelectPackage} onNavigate={handleNavigate} />;
     }

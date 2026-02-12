@@ -8,7 +8,8 @@ export enum OrderStatus {
 
 export enum PackageType {
   DIAMOND = 'DIAMOND',
-  MEMBERSHIP = 'MEMBERSHIP'
+  MEMBERSHIP = 'MEMBERSHIP',
+  IN_GAME = 'IN_GAME'
 }
 
 export interface Package {
@@ -37,6 +38,11 @@ export interface Order {
   transactionId: string;
   status: OrderStatus;
   createdAt: string;
+  // For In-Game Topup
+  loginMethod?: string;
+  loginEmail?: string;
+  loginPassword?: string;
+  backupCode?: string;
 }
 
 export interface User {
@@ -45,6 +51,7 @@ export interface User {
   name: string;
   phone: string;
   role: 'USER' | 'ADMIN';
+  walletBalance: number;
 }
 
 export interface SiteSettings {
